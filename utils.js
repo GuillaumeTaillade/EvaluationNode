@@ -41,4 +41,4 @@ function deleteStudent(index){
 }
 
 /* Export des fonctions */
-module.exports = {addStudent, getStudents, deleteStudent};
+module.exports = {addStudent, getStudents, deleteStudent, formatFrenchDate};

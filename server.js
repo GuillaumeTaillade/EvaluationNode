@@ -7,7 +7,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 // je récupère les fonctions du fichier "utils.js"
-const {addStudent, getStudents, deleteStudent} = require('./utils');
+const {addStudent, getStudents, deleteStudent, formatFrenchDate} = require('./utils');
 
 // Configuration d'EJS comme moteur de vue
 app.set('view engine', 'ejs');
@@ -26,7 +26,22 @@ app.listen(port, () => {
 app.get('/', (req, res) => {
   // send set automatically the type of content we send back
   //res.send('<p>home page</p>'); 
-  res.sendFile('./views/home.html', {root : __dirname}); // __dirname correspond à la racine du projet (la ou se trouve le fichier app.js)
+  res.sendFile('./views/home.html', {root : __dirname}); // __dirname correspond à la racine du projet (la ou se trouve le fichier server.js)
+});
+
+app.post('/add', (req, res) => {
+  console.log("server --> action Post");
+  const {name, birth} = req.body;
+
+  // j'envoie les nouvel étudiant dans le tableau
+  addStudent(name, birth);
+  console.log("server --> action Post effectué");
+  // j'affiche les étudiants
+  for(let i = 0; i < getStudents.length; i++){
+    console.log("Etudiant [" + i + "] " + getStudents[i].name +" / " + getStudents[i].birth);
+  }
+  // je redirige l'utilisateur a la homepage
+  res.redirect('/');
 });
 
 // 404 page (METTRE LA FONCTION USE A LA FIN SINON LES GET D'APRES NE MARCHERONT PAS)
@@ -35,7 +50,7 @@ app.use((req, res) => {
 })
 
 /* ---------------------- */
-// // Routes
+// Routes
 // app.get('/', (req, res) => {
 //   // switch pour définir la page html en fonction de l'url
 //   let viewPath = './views/';
