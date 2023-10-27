@@ -44,41 +44,20 @@ app.post('/add', (req, res) => {
   res.redirect('/');
 });
 
+app.get('/users', (req, res) => {
+  res.render('users', { students, formatFrenchDate });
+});
+
+app.get('/delete/:index', (req, res) => {
+  const { index } = req.params;
+  if (index >= 0 && index < students.length) {
+      students.splice(index, 1);
+  }
+  res.redirect('/users');
+});
+
 // 404 page (METTRE LA FONCTION USE A LA FIN SINON LES GET D'APRES NE MARCHERONT PAS)
 app.use((req, res) => {
   res.sendFile('./views/404.html', {root: __dirname});
 })
-
-/* ---------------------- */
-// Routes
-// app.get('/', (req, res) => {
-//   // switch pour définir la page html en fonction de l'url
-//   let viewPath = './views/';
-//   switch (req.url) {
-//     // home page
-//     case '/':
-//       viewPath += 'home.html';
-//       res.statusCode = 200; //status code ok
-//       break;
-//     // page non existante
-//     default:
-//       viewPath += '404.html';
-//       res.statusCode = 404; // status code erreur
-//       break;
-//   }
-//   res.render(viewPath);
-// });
-
-// app.post('/add', (req, res) => {
-//   const { name, birthdate } = req.body;
-//   addStudent(name, birthdate);
-//   res.redirect('/users');
-// });
-
-// app.get('/users', (req, res) => {
-//   const students = getStudents(); // Assurez-vous d'importer getStudents depuis "utils.js"
-//   res.render('users', { students });
-// });
-
-/* ---------------------- */
 
