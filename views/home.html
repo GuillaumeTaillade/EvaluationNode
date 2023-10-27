@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <title>Évaluation Node</title>
+</head>
+
+<body>
+  <h1>Formulaire Étudiant</h1>
+  <form action="/add" method="post">
+    <label for="name">Nom de l'étudiant :</label>
+    <input type="text" id="name" name="name" required>
+    <label for="birthdate">Date de naissance :</label>
+    <input type="date" id="birthdate" name="birthdate" required>
+    <button type="submit">Ajouter l'étudiant</button>
+  </form>
+  <a href="/users">Voir les étudiants</a>
+</body>
+
+</html>
